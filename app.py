@@ -1,4 +1,4 @@
-"""Multi-line OCR document agent -- Gradio app and MCP server.
+"""Doc Agent -- Gradio app and MCP server.
 
 Drop in any document and the agent decides what it is, how to read it, and
 which structured artifacts to produce. The same tools are published over MCP
@@ -153,7 +153,7 @@ def handle(files, instruction, backend, dpi, deskew):
     )
 
 
-with gr.Blocks(title="Document Agent (multi-line OCR)", fill_height=True) as demo:
+with gr.Blocks(title="Doc Agent", fill_height=True) as demo:
     gr.Markdown("# Document Agent\n" + INTRO)
 
     with gr.Row():
