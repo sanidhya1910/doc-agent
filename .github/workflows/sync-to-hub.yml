@@ -10,14 +10,31 @@ jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # v7 runs on node24. v4 targets node20, which is deprecated and now
+      # force-run on node24 anyway, with a warning on every run.
+      - uses: actions/checkout@v7
         with:
+          # Full history: the Space is a git repo of its own, and a shallow
+          # clone cannot be pushed to it.
           fetch-depth: 0
           lfs: true
-      - name: Push to hub
+      - name: Check the token is set
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "::error::HF_TOKEN is not set. Add it under Settings -> Secrets" \
+                 "and variables -> Actions -> Repository secrets."
+            exit 1
+          fi
+
+      - name: Push to hub
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        # HEAD:main, not main -- actions/checkout only creates the triggering
+        # branch locally, so a bare "main" refspec fails on manual dispatch
+        # from any other branch. HEAD works for both triggers.
+        run: |
           git push --force \
             "https://sanidhya1910:$HF_TOKEN@huggingface.co/spaces/sanidhya1910/doc-agent" \
-            main
+            HEAD:main

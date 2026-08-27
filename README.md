@@ -10,7 +10,7 @@ hardware: zero-gpu
 app_file: app.py
 pinned: false
 license: apache-2.0
-short_description: Drop in any document, get back the structured output that suits it
+short_description: Any document in; spreadsheet, JSON or summary out
 tags:
   - ocr
   - document-parsing
