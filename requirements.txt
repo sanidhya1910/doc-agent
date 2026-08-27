@@ -1,5 +1,30 @@
-gradio
-opencv-python
-torch
-transformers
-pillow
+# Gradio is the only SDK ZeroGPU supports. The [mcp] extra is required:
+# without the mcp package, launch(mcp_server=True) silently does nothing.
+gradio[mcp]>=6.14.0,<7
+spaces>=0.40.0
+
+# Pinned into the range ZeroGPU supports (PyTorch 2.8.0 - 2.11.x).
+torch==2.11.0
+torchvision==0.26.0
+
+# glm_ocr and qwen3_5 are native from transformers 5.6 onward -- no git ref.
+transformers>=5.6.0
+accelerate>=1.5.0
+safetensors>=0.5.3
+sentencepiece>=0.2.0
+einops>=0.8.1
+
+# Ingest. pypdfium2 bundles its own PDFium, so no poppler / packages.txt.
+pypdfium2>=4.30.0
+pillow>=11.0.0
+pillow-heif>=0.18.0
+opencv-python-headless>=4.10.0
+numpy>=1.26.0
+
+# Structured export.
+pandas>=2.2.0
+openpyxl>=3.1.0
+python-docx>=1.1.0
+python-pptx>=1.0.0
+reportlab>=4.2.0
+pikepdf>=9.0.0
