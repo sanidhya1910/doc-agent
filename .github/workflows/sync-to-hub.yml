@@ -19,5 +19,5 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           git push --force \
-            "https://blackburn1910:$HF_TOKEN@huggingface.co/spaces/blackburn1910/multi_line_OCR" \
+            "https://sanidhya1910:$HF_TOKEN@huggingface.co/spaces/sanidhya1910/doc-agent" \
             main
