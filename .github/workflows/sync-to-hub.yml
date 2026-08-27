@@ -10,8 +10,12 @@ jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # v7 runs on node24. v4 targets node20, which is deprecated and now
+      # force-run on node24 anyway, with a warning on every run.
+      - uses: actions/checkout@v7
         with:
+          # Full history: the Space is a git repo of its own, and a shallow
+          # clone cannot be pushed to it.
           fetch-depth: 0
           lfs: true
       - name: Check the token is set
